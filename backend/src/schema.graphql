@@ -1,0 +1,41 @@
+type Query {
+    roomData(roomId:ID!): Room
+}
+
+type Room {
+    id: ID!
+    player1: Player
+    player2: Player
+}
+
+type returnRoom {
+    room: Room
+    selfId: ID
+    error:String
+}
+
+type Player {
+    id: ID
+    name: String
+    character: Float
+    isReady: Int
+    error:String
+}
+
+type gameData {
+    id: ID!
+    data: String!
+}
+
+type Mutation {
+    createRoom(name: String!): returnRoom!
+    joinRoom(name: String!, roomId: ID!): returnRoom!
+    roomAct(roomId:ID!, playerId:ID!, act:String!): Player
+    playerData(playerId:ID!, data:String!): String
+    rejoinRoom(playerId:ID!, name: String!, roomId: ID!): returnRoom!
+}
+
+type Subscription {
+    roomActSub(roomId:ID!): Player!
+    dataSub(playerId:ID!): gameData!
+}
